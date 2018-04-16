@@ -6,6 +6,20 @@ Se realiza usando [React Native](https://facebook.github.io/react-native/)
 
 En la carpeta mockups, se encuentran los mockups de las vistas.
 
+### Dependencias:
+
+1. React Navigation:
+
+  `yarn add react-navigation`
+
+  `npm install --save react-navigation`
+
+2. otro:
+
+  `otro comando`
+
+
+
 
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).

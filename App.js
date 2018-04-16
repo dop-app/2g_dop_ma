@@ -1,152 +1,75 @@
+import React from 'react';
+import { Button, View, Text, Image } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  AppRegistry,
-  TouchableHighlight
-} from 'react-native'
-import {
-  NativeRouter,
-  Route,
-  Link,
-  Redirect,
-  withRouter } from 'react-router-native'
-
-import Intro from './components/Intro'
-import Menu from './components/Menu'
-
-// const Auth = () => (
-//   <NativeRouter>
-//     <View style={styles.container}>
-//       <Link path="/intro" component={Intro}/>
-//     </View>
-//   </NativeRouter>
-// )
-
-const Auth = () => (
-  <NativeRouter>
-    <View style={styles.container}>
-      <AuthButton/>
-      <View style={styles.nav}>
-        <Link
-          to="/intro"
-          style={styles.navItem}
-          underlayColor='#f0f4f7'>
-            <Text>Intro</Text>
-        </Link>
-        <Link
-          to="/menu"
-          style={styles.navItem}
-          underlayColor='#f0f4f7'>
-            <Text>Menu</Text>
-        </Link>
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Image
+          style={{ width: 219, height: 150 }}
+          source={require('./components/assets/dop_logo.png')}
+        />
+        <Text>Esto es la aplicación dop!</Text>
+        <Text>Es una aplicación de citas</Text>
+        <Text>podras conocer diversas personas,</Text>
+        <Text>para planes de amigos o algo mas.</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => {
+            /* 1. Navigate to the Details route with params */
+            this.props.navigation.navigate('Details', {
+              itemId: 86,
+              otherParam: 'anything you want here',
+            });
+          }}
+        />
       </View>
-
-      <Route path="/intro" component={Intro}/>
-      <Route path="/login" component={Login}/>
-      <PrivateRoute path="/menu" component={Menu}/>
-    </View>
-  </NativeRouter>
-)
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
+    );
   }
 }
 
-const AuthButton = withRouter(({ history }) => (
-  fakeAuth.isAuthenticated ? (
-    <View>
-      <Text>Welcome!</Text>
-      <TouchableHighlight style={styles.btn} underlayColor='#f0f4f7' onPress={() => {
-        fakeAuth.signout(() => history.push('/'))
-      }}><Text>Sign out</Text></TouchableHighlight>
-    </View>
-  ) : (
-    <Text>You are not logged in.</Text>
-  )
-))
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
-      <Component {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-)
-
-class Login extends Component {
-  state = {
-    redirectToReferrer: false
-  }
-
-  login = () => {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
-  }
-
+class DetailsScreen extends React.Component {
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer } = this.state
-
-    if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
-    }
+    /* 2. Read the params from the navigation state */
+    const { params } = this.props.navigation.state;
+    const itemId = params ? params.itemId : null;
+    const otherParam = params ? params.otherParam : null;
 
     return (
-      <View>
-        <Text>You must log in to view the page at {from.pathname}</Text>
-
-        <TouchableHighlight style={styles.btn} underlayColor='#f0f4f7' onPress={this.login}>
-          <Text>Log in</Text>
-        </TouchableHighlight>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+        <Text>itemId: {JSON.stringify(itemId)}</Text>
+        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+        <Button
+          title="Go to Details... again"
+          onPress={() => this.props.navigation.navigate('Details')}
+        />
+        <Button
+          title="Go back"
+          onPress={() => this.props.navigation.goBack()}
+        />
       </View>
-    )
+    );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 25,
-    padding: 10,
+const RootStack = StackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    Details: {
+      screen: DetailsScreen,
+    },
   },
-  header: {
-    fontSize: 20,
-  },
-  nav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 10,
-  },
-  btn: {
-    width: 200,
-    backgroundColor: '#E94949',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    marginTop: 10,
+  {
+    initialRouteName: 'Home',
   }
-})
+);
 
-export default Auth
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}
