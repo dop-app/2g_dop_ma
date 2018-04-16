@@ -16,7 +16,7 @@ import type { RouterHistory } from 'react-router'
 import Menu from "./Menu"
 
 const client = new ApolloClient({
-    uri: 'http://192.168.0.104:5000/graphql', // ''http://35.227.46.47/graphql',
+    uri: 'http://35.227.46.47:5000/graphql',
 })
 
 const PLEASURE_QUERY = gql`
@@ -46,14 +46,14 @@ user_id:$user_id
 `
 
 const SUBCATEGORY_QUERY = gql`
-query{
+query listSubcategories{
   allSubcategories{
-     category{
-      name
-     }
      id,
      name,
-     description
+     description,
+     category{
+       name
+     }
   }
 }
 `
@@ -95,57 +95,44 @@ const PleasureWithData = ()=>(
     <Query
       query={PLEASURE_QUERY}>
       {({loading,error,data:{pleasureById}})=>{
-	  if(loading) return <Text>Cargando...</Text>
-	      return <View >
+	  if(loading) return <Text>Cargando...</Text>;
+	  return <View >
 	      <Text style={styles.titleText}>{pleasureById.name}</Text>
 		  <Text> {pleasureById.description}</Text>
-	      </View>
+	      </View>;
 	  }
       }
     </Query>
 )
 
-class Subcategories extends React.Component{
-    constructor(props){
-	super(props);
-	this.state = {subcategory:''};
-    }
-    updateSubcategory=(subcategory)=>{
-	this.setState({subcategory: subcategory});
-    };
+class Subcategorie extends React.Component{
     render() {
+	const {id,name,description} = this.props; 
 	return (
-	    <Picker
-	      selectedValue={this.state.subcategory}
-	      style={{height:50,width:100}}
-	      onValueChange={this.updateSubcategory}>
-	      <Picker.Item label="Prueba" value="test"/>;
-	    </Picker>);
+	    <Text>{id}:{name}-{description}</Text>
+	);
     }
 }
-const subcategoriesList = ()=>(
+
+const SubcategoriesList = ()=>(
     <Query query={SUBCATEGORY_QUERY}>
-      {({loading,error,data})=>{
-	  if(loading){
-	      return <Text>Cargando...</Text>;
-	  }
-	  if(error){
-	      return <Text>Error </Text>;
-	  }
-	  
-	  return (<View> {data.allSubcategories.map(subcategory=>(<Text>subcategory.name</Text>
-								 ))}
-		  </View>
-		 );
+      {({loading,error,data:{allSubcategories}})=>{
+	  if(error) return <Text>Error...</Text>;
+	  if(loading) return <Text>Cargando;</Text>;
+	  return(allSubcategories.map(({id,name,description,category}) =>(
+	      <Subcategorie id={id} name={name} description={description + category.name}/>
+	  ))
+
+		)
       }}
     </Query>
-)
+);
 
 class Perfil extends React.Component {
     render() {
   	return (
   	    <ApolloProvider client={client}> 
-	      <PleasureWithData/>
+	      <SubcategoriesList/>
 	    </ApolloProvider>
   	);
     }
