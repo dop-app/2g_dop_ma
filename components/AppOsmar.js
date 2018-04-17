@@ -18,22 +18,22 @@ query pleasure{
 
 class Pleasure extends React.Component{
   render(){
-  	const {data}=this.props
-  	const {loading, pleasureById} = data
-  	if(loading){
-  	    return <ActivityIndicator />
-  	}
-  	return (
-  		<View style={styles.container}>
-  		<Text style={styles.titleText}>
-  		{pleasureById.name}:{pleasureById.description}
+      const {data}=this.props;
+      const {loading, pleasureById} = data;
+      if(loading){
+  	  return <ActivityIndicator />;
+      }
+      return (
+  	  <View style={styles.container}>
+  	    <Text style={styles.titleText}>
+  	      {pleasureById.name}:{pleasureById.description}
   	    </Text>
-  		</View>
-  	)
+  	  </View>
+      );
   }
 }
 
-const PleasureWithData = graphql(PLEASURE_QUERY)(Pleasure)
+const PleasureWithData = graphql(PLEASURE_QUERY)(Pleasure);
 
 export default class App extends React.Component {
   render() {

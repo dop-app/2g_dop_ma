@@ -13,78 +13,30 @@ import {
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { ApolloProvider, Query, Mutation  } from "react-apollo";
+import {PLEASURE_QUERY,SUBCATEGORY_QUERY,PLEASURE_MUTATION} from './graphql/Pleasures.js';
+import {USER_DATA} from './graphql/Users.js';
 
 const client = new ApolloClient({
     uri: 'http://35.227.46.47:5000/graphql',
 })
 
-const PLEASURE_QUERY = gql `
-query pleasure{
-  pleasureById(id:1){
-    name,
-    description   }
-}
-`
-const PLEASURE_MUTATION = gql `
-mutation addPleasure(
-$name:String!,
-$description:String!,
-$subcategory_id:Int!,
-$user_id:Int
-){
-createPleasure(pleasure:{
-name:$name,
-description:$description,
-subcategory_id:$subcategory_id,
-user_id:$user_id
-}){
-  name,
-  description
-}
-}
-`
-
-
-const SUBCATEGORY_QUERY = gql`
-query listSubcategories{
-  allSubcategories{
-     id,
-     name,
-     description,
-     category{
-       name
-     }
-  }
-}
-`
-const USER_DATA = gql `
-query userData($id:Int!){
-  userById(id: $id){
-    name,
-    email,
-    gender,
-    picture,
-    age
-  }
-}
-`
 
 const UserInfo = ({id}) =>(
   <Query query={USER_DATA}
    variables={{id}}>
     {({loading,error,data:{userById}})=>{
-      if(error) return <Text>Intentelo más tarde...</Text>
-      if(loading) return <Text>Cargando...</Text>
+	if(error) return <Text>Intentelo más tarde...</Text>
+	    if(loading) return <Text>Cargando...</Text>
 
-      return(
-        <View>
-          <Text>Información</Text>
-          <Text>{userById.name}</Text>
-          <Text>{userById.email}</Text>
-          <Text>{userById.gender}</Text>
-          <Text>{userById.age}</Text>
-        </View>
-      );
+	return(
+            <View>
+              <Text>Información</Text>
+              <Text>{userById.name}</Text>
+              <Text>{userById.email}</Text>
+              <Text>{userById.gender}</Text>
+              <Text>{userById.age}</Text>
+            </View>
+	);
     }}
 
   </Query>
@@ -129,11 +81,53 @@ const SubcategoriesList = ()=>(
     </Query>
 );
 
+class  AddPleasure extends Component{
+    constructor(props){
+	super(props);
+	this.state = {name:'',
+		      description:'',
+		      subcategory_id:'',
+		      user_id:''
+		     };
+    }
+    render(){
+	return(
+	    <Mutation mutation={PLEASURE_MUTATION}>
+	      {(addPleasure,{loading, error, data})=>(
+		  <View>
+		    <TextInput
+		      multiline = {false}
+		      style={{height: 100}}
+		      placeholder="nombre"
+		      onSubmitText={(text) => {
+			  this.setState({text});
+			  
+			  }
+		      }
+		      />
+		      <TouchableOpacity
+			style = {styles.submitButton}
+			onPress ={
+			    ()=>{
+				addPleasure({variables:{name: this.state.text}});
+			    }
+			}
+			>
+			<Text > Submit </Text>
+		      </TouchableOpacity>
+		      {error && <Text>Intentelo más tarde...</Text>}
+		      {loading && <Text>Cargando...</Text>}
+		  </View>
+	      )}
+	    </Mutation>
+	);
+    };
+};
 class Perfil extends React.Component {
     render() {
   	return (
-  	    <ApolloProvider client={client}> 
-	      <SubcategoriesList/>
+  	    <ApolloProvider client={client}>
+	      <AddPleasure/>
 	    </ApolloProvider>
   	);
     }
