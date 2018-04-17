@@ -21,25 +21,44 @@ const client = new ApolloClient({
 })
 
 
-const UserInfo = ({id}) =>(
-  <Query query={USER_DATA}
-   variables={{id}}>
-    {({loading,error,data:{userById}})=>{
-	if(error) return <Text>Intentelo más tarde...</Text>
-	    if(loading) return <Text>Cargando...</Text>
-
+class ShowUserInfo extends React.Component {
+    render(){
+	const {name,email,gender,age,picture} = this.props;
 	return(
-            <View>
-              <Text>Información</Text>
-              <Text>{userById.name}</Text>
-              <Text>{userById.email}</Text>
-              <Text>{userById.gender}</Text>
-              <Text>{userById.age}</Text>
-            </View>
+	    <View>
+              <Image
+		style={{width: 50, height: 50}}
+		source={{uri:picture}}
+		/> 
+	      <Text>Información</Text>
+	      <Text>{name}</Text>
+	      <Text>{email}</Text>
+	      <Text>{gender}</Text>
+	      <Text>{age}</Text> 
+	    </View>
 	);
-    }}
+    }
+}
 
-  </Query>
+const UserInfo = () =>(
+    <Query query={USER_DATA}
+	   variables={{id:1}}>
+      {({loading,error,data:{userById}})=>{
+	  if(error) return <Text>Intentelo más tarde...</Text>
+	      if(loading) return <Text>Cargando...</Text>
+
+	  return(
+	      <ShowUserInfo
+		name={userById.name}
+		email={userById.email}
+		gender={userById.gender}
+		age={userById.age}
+		picture={userById.picture}
+		/>
+	  );
+      }}
+
+    </Query>
 );
 
 const PleasureWithData = ()=>(
@@ -138,8 +157,8 @@ class Perfil extends React.Component {
       </View>
       <View style={styles.container}>
         <ApolloProvider client={client}>
-  	    <PleasureWithData/>
-  	    </ApolloProvider>
+	  <UserInfo/>
+	</ApolloProvider>
       </View>
     </View>
     );
