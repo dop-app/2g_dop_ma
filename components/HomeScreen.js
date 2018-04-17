@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Button, View, Text, Image } from 'react-native';
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -59,8 +58,8 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',  // flex-start, center, flex-end, and stretch
+    justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
   },
 });
 

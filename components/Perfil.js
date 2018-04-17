@@ -15,7 +15,7 @@ import gql from "graphql-tag";
 import { ApolloProvider, Query, Mutation  } from "react-apollo";
 import {PLEASURE_QUERY,SUBCATEGORY_QUERY,PLEASURE_MUTATION} from './graphql/Pleasures.js';
 import {USER_DATA} from './graphql/Users.js';
-import  PickerList  from './PickerList.js';
+
 const client = new ApolloClient({
     uri: 'http://35.227.46.47:5000/graphql',
 })
@@ -60,7 +60,7 @@ const PleasureWithData = ()=>(
 
 class Subcategorie extends React.Component{
     render() {
-	const {id,name,description} = this.props; 
+	const {id,name,description} = this.props;
 	return (
 	    <Text>{id}:{name}-{description}</Text>
 	);
@@ -101,7 +101,7 @@ class  AddPleasure extends React.Component{
 		      placeholder="nombre"
 		      onSubmitText={(text) => {
 			  this.setState({text});
-			  
+
 			  }
 		      }
 		      />
@@ -124,33 +124,28 @@ class  AddPleasure extends React.Component{
     };
 };
 
-const PickerExample = () => {
-    return(
-	<PickerList />
-    );
-	
-};
-
 class Perfil extends React.Component {
-    static navigationOptions = {
-	title: 'Perfil',
-    };
+  static navigationOptions = {
+    title: 'Perfil',
+  };
 
     render() {
 	return (
-	    <View style={styles.container}>
-              <Button title="Menu" onPress={this._showMenuApp} />
-              <StatusBar barStyle="default" />
-              <Text></Text>
-	      <ApolloProvider client={client}>
-		<PleasureWithData/>
-	      </ApolloProvider>
-	      <PickerList />
-	    </View>
-	);
-    }
+    <View>
+      <View style={styles.btn}>
+        <Button title="Menu" onPress={this._showMenuApp} />
+        <StatusBar barStyle="default" />
+      </View>
+      <View style={styles.container}>
+        <ApolloProvider client={client}>
+  	    <PleasureWithData/>
+  	    </ApolloProvider>
+      </View>
+    </View>
+    );
+  }
 
-    _showMenuApp = () => {
+  _showMenuApp = () => {
     this.props.navigation.navigate('Home');
   };
 
@@ -163,8 +158,12 @@ class Perfil extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center',  // flex-start, center, flex-end, and stretch
+    justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
+  },
+  btn: {
+    alignItems: 'flex-end',  // flex-start, center, flex-end, and stretch
+    justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
   },
 });
 

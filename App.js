@@ -1,12 +1,3 @@
-// import React from 'react';
-// import {
-//   ActivityIndicator,
-//   AsyncStorage,
-//   Button,
-//   StatusBar,
-//   StyleSheet,
-//   View,
-// } from 'react-native';
 import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 import AuthLoadingScreen from './components/AuthLoadingScreen.js'
