@@ -10,33 +10,31 @@ import {
   Image
 } from 'react-native';
 
-class Citas extends React.Component {
+class SignInScreen extends React.Component {
   static navigationOptions = {
-    title: 'Citas',
+    title: 'Por favor, registrese',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Button title="Menu" onPress={this._showMenuApp} />
-        <StatusBar barStyle="default" />
-        <Text></Text>
+        <Image
+          style={{ width: 219, height: 150 }}
+          source={require('./assets/dop_logo_negro.png')}
+        />
         <Text>Esto es la aplicación dop!</Text>
         <Text>Es una aplicación de citas</Text>
         <Text>podras conocer diversas personas,</Text>
         <Text>para planes de amigos o algo mas.</Text>
-        <Text>estoy desde el Citas.</Text>
+        <Text></Text>
+        <Button title="Iniciar Sesión" onPress={this._signInAsync} />
       </View>
     );
   }
 
-  _showMenuApp = () => {
-    this.props.navigation.navigate('Home');
-  };
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
+  _signInAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'abc');
+    this.props.navigation.navigate('App');
   };
 }
 
@@ -48,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Citas
+export default SignInScreen

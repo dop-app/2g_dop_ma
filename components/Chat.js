@@ -1,41 +1,51 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { NativeRouter,
-  Route,
-  Link,
-  BackButton,
-  Promt,
-  withRouter,
-  Redirect } from 'react-router-native'
-import type { RouterHistory } from 'react-router'
+import React from 'react';
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  Button,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+  Image
+} from 'react-native';
 
-import Menu from "./Menu"
+class OtherScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Chat',
+  };
 
-class Chat extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Button title="Menu" onPress={this._showMenuApp} />
+        <StatusBar barStyle="default" />
+        <Text></Text>
         <Text>Esto es la aplicación dop!</Text>
         <Text>Es una aplicación de citas</Text>
         <Text>podras conocer diversas personas,</Text>
         <Text>para planes de amigos o algo mas.</Text>
         <Text>estoy desde el Chat.</Text>
       </View>
-    )
+    );
   }
+
+  _showMenuApp = () => {
+    this.props.navigation.navigate('Home');
+  };
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 10,
-  },
 });
 
-export default Chat
+export default OtherScreen
