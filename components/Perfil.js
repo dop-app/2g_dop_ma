@@ -15,7 +15,7 @@ import gql from "graphql-tag";
 import { ApolloProvider, Query, Mutation  } from "react-apollo";
 import {PLEASURE_QUERY,SUBCATEGORY_QUERY,PLEASURE_MUTATION} from './graphql/Pleasures.js';
 import {USER_DATA} from './graphql/Users.js';
-
+import  PickerList  from './PickerList.js';
 const client = new ApolloClient({
     uri: 'http://35.227.46.47:5000/graphql',
 })
@@ -123,25 +123,34 @@ class  AddPleasure extends React.Component{
 	);
     };
 };
+
+const PickerExample = () => {
+    return(
+	<PickerList />
+    );
+	
+};
+
 class Perfil extends React.Component {
-  static navigationOptions = {
-    title: 'Perfil',
-  };
+    static navigationOptions = {
+	title: 'Perfil',
+    };
 
     render() {
 	return (
-      <View style={styles.container}>
-        <Button title="Menu" onPress={this._showMenuApp} />
-        <StatusBar barStyle="default" />
-        <Text></Text>
-        <ApolloProvider client={client}>
-  	      <PleasureWithData/>
-  	    </ApolloProvider>
-      </View>
-    );
-  }
+	    <View style={styles.container}>
+              <Button title="Menu" onPress={this._showMenuApp} />
+              <StatusBar barStyle="default" />
+              <Text></Text>
+	      <ApolloProvider client={client}>
+		<PleasureWithData/>
+	      </ApolloProvider>
+	      <PickerList />
+	    </View>
+	);
+    }
 
-  _showMenuApp = () => {
+    _showMenuApp = () => {
     this.props.navigation.navigate('Home');
   };
 
