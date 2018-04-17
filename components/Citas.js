@@ -17,15 +17,18 @@ class Citas extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button title="Menu" onPress={this._showMenuApp} />
-        <StatusBar barStyle="default" />
-        <Text></Text>
-        <Text>Esto es la aplicación dop!</Text>
-        <Text>Es una aplicación de citas</Text>
-        <Text>podras conocer diversas personas,</Text>
-        <Text>para planes de amigos o algo mas.</Text>
-        <Text>estoy desde el Citas.</Text>
+      <View>
+        <View style={styles.btn}>
+          <Button title="Menu" onPress={this._showMenuApp} />
+          <StatusBar barStyle="default" />
+        </View>
+        <View style={styles.container}>
+          <Text>Esto es la aplicación dop!</Text>
+          <Text>Es una aplicación de citas</Text>
+          <Text>podras conocer diversas personas,</Text>
+          <Text>para planes de amigos o algo mas.</Text>
+          <Text>estoy desde el Citas.</Text>
+        </View>
       </View>
     );
   }
@@ -43,8 +46,12 @@ class Citas extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center',  // flex-start, center, flex-end, and stretch
+    justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
+  },
+  btn: {
+    alignItems: 'flex-end',  // flex-start, center, flex-end, and stretch
+    justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
   },
 });
 
