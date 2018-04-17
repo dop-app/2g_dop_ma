@@ -13,7 +13,7 @@ import {
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { ApolloProvider, Query, Mutation  } from "react-apollo";
-import {PLEASURE_QUERY,SUBCATEGORY_QUERY,PLEASURE_MUTATION} from './graphql/Pleasures.js';
+import {PLEASURE_QUERY,PLEASURES_QUERY,SUBCATEGORY_QUERY,PLEASURE_MUTATION} from './graphql/Pleasures.js';
 import {USER_DATA} from './graphql/Users.js';
 
 const client = new ApolloClient({
@@ -39,7 +39,18 @@ class ShowUserInfo extends React.Component {
 	);
     }
 }
-
+class PleasureView extends React.Component{
+    render(){
+	const {name,description,subcategory}= this.props;
+	return (
+	    <View >
+	      <Text>{subcategory}</Text>
+	      <Text style={styles.titleText}>{name}</Text>
+	      <Text> {description}</Text>
+	    </View>
+	);
+    }
+}
 const UserInfo = () =>(
     <Query query={USER_DATA}
 	   variables={{id:1}}>
@@ -61,21 +72,21 @@ const UserInfo = () =>(
     </Query>
 );
 
-const PleasureWithData = ()=>(
-  <Query
-    query={PLEASURE_QUERY}>
-    {({loading,error,data:{pleasureById}})=>{
-      if(loading) return <Text>Cargando...</Text>
-        return (
-          <View >
-            <Text style={styles.titleText}>{pleasureById.name}</Text>
-            <Text> {pleasureById.description}</Text>
-          </View>
-        );
-      }
-    }
-  </Query>
-)
+const PleasuresWithData = ()=>(
+    <Query
+      query={PLEASURES_QUERY}
+      variables={{id:1}}>
+      {({loading,error,data:{pleasureByUser}})=>{
+	  if(error) return <Text>Error!</Text>
+	      
+	  if(loading) return <Text>Cargando...</Text>
+	      
+          return (pleasureByUser.map(({name,description,subcategory})=>(
+	      <PleasureView name={name} description={description} subcategory={subcategory.name}/>
+	  ) ));
+      }}
+    </Query>
+);
 
 class Subcategorie extends React.Component{
     render() {
@@ -157,7 +168,8 @@ class Perfil extends React.Component {
       </View>
       <View style={styles.container}>
         <ApolloProvider client={client}>
-	  <UserInfo/>
+
+	  <PleasuresWithData/>
 	</ApolloProvider>
       </View>
     </View>
