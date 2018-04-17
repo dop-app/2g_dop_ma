@@ -81,7 +81,7 @@ const SubcategoriesList = ()=>(
     </Query>
 );
 
-class  AddPleasure extends Component{
+class  AddPleasure extends React.Component{
     constructor(props){
 	super(props);
 	this.state = {name:'',
@@ -124,22 +124,12 @@ class  AddPleasure extends Component{
     };
 };
 class Perfil extends React.Component {
-    render() {
-  	return (
-  	    <ApolloProvider client={client}>
-	      <AddPleasure/>
-	    </ApolloProvider>
-  	);
-    }
-};
-
-class Perfil extends React.Component {
   static navigationOptions = {
     title: 'Perfil',
   };
 
-  render() {
-    return (
+    render() {
+	return (
       <View style={styles.container}>
         <Button title="Menu" onPress={this._showMenuApp} />
         <StatusBar barStyle="default" />
