@@ -8,15 +8,8 @@ En la carpeta mockups, se encuentran los mockups de las vistas.
 
 ### Dependencias:
 
-1. React Navigation:
-
-  `yarn add react-navigation`
-
-  `npm install --save react-navigation`
-
-2. otro:
-
-  `otro comando`
+1. React Navigation
+2. Redux
 
 
 

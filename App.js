@@ -1,37 +1,42 @@
-import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version can be specified in package.json
+import React from 'react'
+import { StyleSheet, View, StatusBar } from 'react-native'
+import { Provider } from 'react-redux'
+import createStore from './Redux'
+/*
+* Both of the following files work for react-navigation
+* Routes will always be added and supported by modifying
+* the AppNavigation file.  Special redux actions/reducers
+* will be handled in Redux Navigation
+*   // use this to use react-navigation no redux
+*   import AppNavigation from './Navigation/AppNavigation'
+*
+*   // use this to use react-navigation with redux
+*   import ReduxNavigation from './Navigation/ReduxNavigation'
+*/
 
-import AuthLoadingScreen from './components/AuthLoadingScreen.js'
-import SignInScreen from './components/SignInScreen.js'
+// We're going to use navigation with redux
+import ReduxNavigation from './Navigation/ReduxNavigation'
 
-import HomeScreen from './components/HomeScreen.js'
-
-import Amigos from './components/Amigos.js'
-import Chat from './components/Chat.js'
-import Citas from './components/Citas.js'
-import Perfil from './components/Perfil.js'
-import Recomendaciones from './components/Recomendaciones.js'
+// create our store
+const store = createStore()
 
 
-const AppStack = StackNavigator({
-  Home: HomeScreen,
-  Amigos: Amigos,
-  Chat: Chat,
-  Citas: Citas,
-  Perfil: Perfil,
-  Recomendaciones: Recomendaciones
-});
-
-const AuthStack = StackNavigator({
-  SignIn: SignInScreen
-});
-
-export default SwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: AppStack,
-    Auth: AuthStack,
-  },
-  {
-    initialRouteName: 'AuthLoading',
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <View style={styles.container}>
+          <StatusBar barStyle='light-content' />
+          <ReduxNavigation />
+        </View>
+      </Provider>
+    )
   }
-);
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+})

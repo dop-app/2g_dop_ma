@@ -1,14 +1,5 @@
-import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  Button,
-  StatusBar,
-  StyleSheet,
-  View,
-  Text,
-  Image
-} from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
@@ -20,7 +11,6 @@ const client = new ApolloClient({
     uri: 'http://35.227.46.47:5000/graphql',
 })
 
-
 class ShowUserInfo extends React.Component {
     render(){
 	const {name,email,gender,age,picture} = this.props;
@@ -29,12 +19,12 @@ class ShowUserInfo extends React.Component {
               <Image
 		style={{width: 50, height: 50}}
 		source={{uri:picture}}
-		/> 
+		/>
 	      <Text>Información</Text>
 	      <Text>{name}</Text>
 	      <Text>{email}</Text>
 	      <Text>{gender}</Text>
-	      <Text>{age}</Text> 
+	      <Text>{age}</Text>
 	    </View>
 	);
     }
@@ -143,47 +133,35 @@ class  AddPleasure extends React.Component{
     };
 };
 
-class Perfil extends React.Component {
-  static navigationOptions = {
-    title: 'Perfil',
-  };
 
-    render() {
-	return (
-    <View>
-      <View style={styles.btn}>
-        <Button title="Menu" onPress={this._showMenuApp} />
-        <StatusBar barStyle="default" />
-      </View>
-      <View style={styles.container}>
-        <ApolloProvider client={client}>
-	  <UserInfo/>
-	</ApolloProvider>
-      </View>
-    </View>
-    );
+
+export default class Perfil extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Perfil',
+    drawerIcon: () => (
+      <Image
+        source={{uri: `https://dummyimage.com/60x60/000/fff.jpg&text=1`}}
+        style={{width: 30, height: 30, borderRadius: 15}}
+      />
+    )
   }
 
-  _showMenuApp = () => {
-    this.props.navigation.navigate('Home');
-  };
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
+  render() {
+    return (
+      <View style={styles.container}>
+        <ApolloProvider client={client}>
+        <UserInfo/>
+        </ApolloProvider>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',  // flex-start, center, flex-end, and stretch
     justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
   },
-  btn: {
-    alignItems: 'flex-end',  // flex-start, center, flex-end, and stretch
-    justifyContent: 'flex-start', // flex-start, center, flex-end, space-around, space-between and space-evenly
-  },
-});
-
-export default Perfil;
+})
