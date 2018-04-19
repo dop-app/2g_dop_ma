@@ -7,6 +7,19 @@ query pleasure{
     description   }
 }
 `;
+
+export const PLEASURES_QUERY = gql`
+query pleasuresData($id:Int!){
+  pleasureByUser(user_id:$id){
+    name,
+    description,
+    subcategory{
+      name
+    }
+  }
+}
+`;
+
 export const PLEASURE_MUTATION = gql`
 mutation addPleasure(
 $name:String!,
