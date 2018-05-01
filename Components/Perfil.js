@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Image } from 'react-native'
+import { Container, Header, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
@@ -12,139 +13,135 @@ const client = new ApolloClient({
 })
 
 class ShowUserInfo extends React.Component {
-    render(){
-	const {name,email,gender,age,picture} = this.props;
-	return(
-	    <View>
-              <Image
-		style={{width: 50, height: 50}}
-		source={{uri:picture}}
-		/>
-	      <Text>Información</Text>
-	      <Text>{name}</Text>
-	      <Text>{email}</Text>
-	      <Text>{gender}</Text>
-	      <Text>{age}</Text>
-	    </View>
-	);
-    }
+  render(){
+  	const {name,email,gender,age,picture} = this.props;
+  	return(
+  	   <Content>
+        <Image
+      		style={{width: 50, height: 50}}
+      		source={{uri:picture}}
+    		/>
+        <Text>Información</Text>
+        <Text>{name}</Text>
+        <Text>{email}</Text>
+        <Text>{gender}</Text>
+        <Text>{age}</Text>
+      </Content>
+  	);
+  }
 }
+
 class PleasureView extends React.Component{
-    render(){
-	const {name,description,subcategory}= this.props;
-	return (
-	    <View >
+  render(){
+  	const {name,description,subcategory}= this.props;
+  	return (
+	    <Content>
 	      <Text>{subcategory}</Text>
 	      <Text style={styles.titleText}>{name}</Text>
 	      <Text> {description}</Text>
-	    </View>
-	);
-    }
+	    </Content>
+  	);
+  }
 }
+
 const UserInfo = () =>(
     <Query query={USER_DATA}
-	   variables={{id:1}}>
-      {({loading,error,data:{userById}})=>{
-	  if(error) return <Text>Intentelo más tarde...</Text>
-	      if(loading) return <Text>Cargando...</Text>
+    variables={{id:1}}>
+    {({loading,error,data:{userById}})=>{
+  	  if(error) return <Text>Intentelo más tarde...</Text>
+        if(loading) return <Text>Cargando...</Text>
 
-	  return(
-	      <ShowUserInfo
-		name={userById.name}
-		email={userById.email}
-		gender={userById.gender}
-		age={userById.age}
-		picture={userById.picture}
-		/>
-	  );
-      }}
+  	  return(
+        <ShowUserInfo
+      		name={userById.name}
+      		email={userById.email}
+      		gender={userById.gender}
+      		age={userById.age}
+      		picture={userById.picture}
+    		/>
+  	  );
+    }}
 
-    </Query>
+  </Query>
 );
 
 const PleasuresWithData = ()=>(
-    <Query
-      query={PLEASURES_QUERY}
-      variables={{id:1}}>
-      {({loading,error,data:{pleasureByUser}})=>{
-	  if(error) return <Text>Error!</Text>
+  <Query
+    query={PLEASURES_QUERY}
+    variables={{id:1}}>
+    {({loading,error,data:{pleasureByUser}})=>{
+      if(error) return <Text>Error!</Text>
 
-	  if(loading) return <Text>Cargando...</Text>
+      if(loading) return <Text>Cargando...</Text>
 
-          return (pleasureByUser.map(({name,description,subcategory})=>(
-	      <PleasureView name={name} description={description} subcategory={subcategory.name}/>
-	  ) ));
-      }}
-    </Query>
+      return (pleasureByUser.map(({name,description,subcategory})=>(
+        <PleasureView name={name} description={description} subcategory={subcategory.name}/>
+      )));
+    }}
+  </Query>
 );
 
 class Subcategorie extends React.Component{
-    render() {
-	const {id,name,description} = this.props;
-	return (
-	    <Text>{id}:{name}-{description}</Text>
-	);
-    }
+  render() {
+  	const {id,name,description} = this.props;
+  	return (
+      <Text>{id}:{name}-{description}</Text>
+  	);
+  }
 }
 
 const SubcategoriesList = ()=>(
-    <Query query={SUBCATEGORY_QUERY}>
-      {({loading,error,data:{allSubcategories}})=>{
-	  if(error) return <Text>Error...</Text>;
-	  if(loading) return <Text>Cargando;</Text>;
-	  return(allSubcategories.map(({id,name,description,category}) =>(
+  <Query query={SUBCATEGORY_QUERY}>
+    {({loading,error,data:{allSubcategories}})=>{
+  	  if(error) return <Text>Error...</Text>;
+  	  if(loading) return <Text>Cargando;</Text>;
+  	  return(allSubcategories.map(({id,name,description,category}) =>(
 	      <Subcategorie id={id} name={name} description={description + category.name}/>
-	  ))
-
-		);
-      }}
-    </Query>
+  	  )));
+    }}
+  </Query>
 );
 
 class  AddPleasure extends React.Component{
-    constructor(props){
-	super(props);
-	this.state = {name:'',
-		      description:'',
-		      subcategory_id:'',
-		      user_id:''
-		     };
-    }
-    render(){
+  constructor(props){
+  	super(props);
+  	this.state = {name:'',
+        		      description:'',
+        		      subcategory_id:'',
+        		      user_id:''
+        		     };
+  }
+  render(){
 	return(
-	    <Mutation mutation={PLEASURE_MUTATION}>
-	      {(addPleasure,{loading, error, data})=>(
-		  <View>
-		    <TextInput
-		      multiline = {false}
-		      style={{height: 100}}
-		      placeholder="nombre"
-		      onSubmitText={(text) => {
-			  this.setState({text});
-
-			  }
-		      }
+    <Mutation mutation={PLEASURE_MUTATION}>
+      {(addPleasure,{loading, error, data})=>(
+  		  <Content>
+  		    <TextInput
+  		      multiline = {false}
+  		      style={{height: 100}}
+  		      placeholder="nombre"
+  		      onSubmitText={(text) => {
+              this.setState({text});
+            }}
 		      />
 		      <TouchableOpacity
-			style = {styles.submitButton}
-			onPress ={
-			    ()=>{
-				addPleasure({variables:{name: this.state.text}});
-			    }
-			}
-			>
-			<Text > Submit </Text>
-		      </TouchableOpacity>
-		      {error && <Text>Intentelo más tarde...</Text>}
-		      {loading && <Text>Cargando...</Text>}
-		  </View>
-	      )}
+      			style = {styles.submitButton}
+      			onPress ={
+    			    ()=>{
+  				      addPleasure({variables:{name: this.state.text}});
+    			    }
+            }
+    			>
+    			<Text > Submit </Text>
+  		      </TouchableOpacity>
+  		      {error && <Text>Intentelo más tarde...</Text>}
+  		      {loading && <Text>Cargando...</Text>}
+    		  </Content>
+      )}
 	    </Mutation>
-	);
-    };
+    );
+  };
 };
-
-
 
 export default class Perfil extends React.Component {
   static navigationOptions = {
@@ -159,11 +156,13 @@ export default class Perfil extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ApolloProvider client={client}>
-        <UserInfo/>
-        </ApolloProvider>
-      </View>
+      <Container style={styles.container}>
+        <Content>
+          <ApolloProvider client={client}>
+          <UserInfo/>
+          </ApolloProvider>
+        </Content>
+      </Container>
     );
   }
 }

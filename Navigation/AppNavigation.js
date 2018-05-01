@@ -23,11 +23,11 @@ const noTransitionConfig = () => ({
 
 // drawer stack
 const DrawerStack = DrawerNavigator({
+  Perfil: { screen: Perfil },
+  Recomendaciones: { screen: Recomendaciones },
   Amigos: { screen: Amigos },
   Chat: { screen: Chat },
   Citas: { screen: Citas },
-  Perfil: { screen: Perfil },
-  Recomendaciones: { screen: Recomendaciones },
 }, {
   gesturesEnabled: false,
   contentComponent: DrawerContainer

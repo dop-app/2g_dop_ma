@@ -1,5 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, StatusBar } from 'react-native'
+
+import { Font, AppLoading } from "expo";
+
 import { Provider } from 'react-redux'
 import createStore from './Redux'
 /*
@@ -20,8 +23,19 @@ import ReduxNavigation from './Navigation/ReduxNavigation'
 // create our store
 const store = createStore()
 
-
 export default class App extends React.Component {
+
+  // insert fonts
+  // async componentWillMount() {
+  //   await Expo.Font.loadAsync({
+  //     'Roboto': require('native-base/Fonts/Roboto.ttf'),
+  //     'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+  //     'Comfortaa_Bold': require('./Components/fonts/Comfortaa-Bold.ttf'),
+  //     'Comfortaa_Light': require('./Components/fonts/Comfortaa-Light.ttf'),
+  //     'Comfortaa_Regular': require('./Components/fonts/Comfortaa-Regular.ttf'),
+  //   });
+  // }
+
   render() {
     return (
       <Provider store={store}>

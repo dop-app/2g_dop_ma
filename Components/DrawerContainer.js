@@ -19,6 +19,16 @@ export default class DrawerContainer extends React.Component {
     const { navigation } = this.props
     return (
       <View style={styles.container}>
+      <Text
+        onPress={() => navigation.navigate('Perfil')}
+        style={styles.uglyDrawerItem}>
+        Perfil
+      </Text>
+      <Text
+        onPress={() => navigation.navigate('Recomendaciones')}
+        style={styles.uglyDrawerItem}>
+        Recomendaciones
+      </Text>
         <Text
           onPress={() => navigation.navigate('Amigos')}
           style={styles.uglyDrawerItem}>
@@ -33,16 +43,6 @@ export default class DrawerContainer extends React.Component {
           onPress={() => navigation.navigate('Citas')}
           style={styles.uglyDrawerItem}>
           Citas
-        </Text>
-        <Text
-          onPress={() => navigation.navigate('Perfil')}
-          style={styles.uglyDrawerItem}>
-          Perfil
-        </Text>
-        <Text
-          onPress={() => navigation.navigate('Recomendaciones')}
-          style={styles.uglyDrawerItem}>
-          Recomendaciones
         </Text>
         <Text
           onPress={this.logout}

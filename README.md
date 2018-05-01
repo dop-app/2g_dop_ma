@@ -10,6 +10,8 @@ En la carpeta mockups, se encuentran los mockups de las vistas.
 
 1. React Navigation
 2. Redux
+3. native-base
+4.
 
 
 
