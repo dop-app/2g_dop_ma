@@ -1,56 +1,35 @@
-import React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
+import React from 'react';
 
-import { Font, AppLoading } from "expo";
+import Expo from "expo";
 
-import { Provider } from 'react-redux'
-import createStore from './Redux'
-/*
-* Both of the following files work for react-navigation
-* Routes will always be added and supported by modifying
-* the AppNavigation file.  Special redux actions/reducers
-* will be handled in Redux Navigation
-*   // use this to use react-navigation no redux
-*   import AppNavigation from './Navigation/AppNavigation'
-*
-*   // use this to use react-navigation with redux
-*   import ReduxNavigation from './Navigation/ReduxNavigation'
-*/
 
-// We're going to use navigation with redux
-import ReduxNavigation from './Navigation/ReduxNavigation'
+
+import LoginScreen from './src/LoginScreen/index.js';
 
 // create our store
-const store = createStore()
+//const store = createStore()
 
 export default class App extends React.Component {
+    constructor(){
+	super();
+	this.state = {
+	    isReady:false
+	};
+    }
+    async componentWillMount(){
+	await Expo.Font.loadAsync({
+	    Roboto: require("native-base/Fonts/Roboto.ttf"),
+	    Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+	    Ionicons: require("native-base/Fonts/Ionicons.ttf")
+	});
+	this.setState({isReady:true});
+    }
+    render() {
+	if(!this.state.isReady){
+	    return <Expo.AppLoading />;
+	}
+	return <LoginScreen/>;
+    }
 
-  // insert fonts
-  // async componentWillMount() {
-  //   await Expo.Font.loadAsync({
-  //     'Roboto': require('native-base/Fonts/Roboto.ttf'),
-  //     'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-  //     'Comfortaa_Bold': require('./Components/fonts/Comfortaa-Bold.ttf'),
-  //     'Comfortaa_Light': require('./Components/fonts/Comfortaa-Light.ttf'),
-  //     'Comfortaa_Regular': require('./Components/fonts/Comfortaa-Regular.ttf'),
-  //   });
-  // }
-
-  render() {
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <StatusBar barStyle='light-content' />
-          <ReduxNavigation />
-        </View>
-      </Provider>
-    )
-  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-})
