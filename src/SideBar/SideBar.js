@@ -25,7 +25,7 @@ export default class SideBar extends React.Component{
 			  <ListItem
 			    button
 			    onPress={() => this.props.navigation.navigate(data)}>
-			    <Text>{data}</Text>
+			    <Text style={{ fontFamily: 'Comfortaa_regular'}}>{data}</Text>
 			  </ListItem>
 		      );
 		  }}

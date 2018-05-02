@@ -16,7 +16,7 @@ class Profile extends React.Component {
 	    <Container>
 	      <Header>
 		<Left>
-		  <Title>dop</Title>
+		  <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
 		</Left>
 		<Body>
 		  <Title>Perfil</Title>

@@ -22,7 +22,7 @@ class LoginScreen extends React.Component {
 	    <Container>
 	      <Header>
 		<Body>
-		  <Title>dop</Title>
+		  <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
 		</Body>
 	      </Header>
 	      <Content padder>
@@ -40,7 +40,7 @@ class LoginScreen extends React.Component {
                       onChangeText={(text) => this.setState({ password: text })} 
 		      secureTextEntry={true}/>
 		  </Item>
-		  <Button onPress={(e) => this.userLogin(e)} full style={{ marginTop: 10 }}><Text>Login</Text></Button>  
+		  <Button onPress={(e) => this.userLogin(e)} full style={{ marginTop: 10 }}><Text style={{ fontFamily: 'Comfortaa_regular'}}>Login</Text></Button>  
 		</Form>
 	      </Content>
 	    </Container>

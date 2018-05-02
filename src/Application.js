@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Expo from "expo";
 import LoginScreen from './LoginScreen/index.js';
 import ProfileScreen from './ProfileScreen/index.js';
+import GlobalFont from 'react-native-global-font';
 
 // create our store
 //const store = createStore()
@@ -16,11 +17,12 @@ class Application extends React.Component {
     }
     async componentWillMount(){
 	await Expo.Font.loadAsync({
-	    Roboto: require("native-base/Fonts/Roboto.ttf"),
+	    Comfortaa_regular: require("./fonts/Comfortaa-Regular.ttf"),
 	    Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
 	    Ionicons: require("native-base/Fonts/Ionicons.ttf")
 	});
 	this.setState({isReady:true});
+	GlobalFont.applyGlobal('Comfortaa_regular');
     }
     render() {
 	if(!this.state.isReady){
