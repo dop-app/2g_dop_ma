@@ -1,51 +1,63 @@
 import React  from "react";
-import {AppRegistry, Alert} from "react-native";
+import {AppRegistry, Image} from "react-native";
+import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
 import EditScreenOne from "./EditScreenOne.js";
-export default class Profile extends React.Component {
-    componentDidMount(){
-	Alert.alert("Opps, Looks like you are not signed in"); 
+class Profile extends React.Component {
+    /* componentDidMount(){
+       Alert.alert("Opps, Looks like you are not signed in"); 
+       }*/
+    constructor(props){
+	super(props);
     }
     render() {
 	return(
-		<Container>
-		<Content padder>
+	    <Container>
+	      <Header>
+		<Left>
+		  <Title>dop</Title>
+		</Left>
+		<Body>
+		  <Title>Perfil</Title>
+		</Body>
+	      </Header>
+	      <Content padder>
 		<Card>
-		<CardItem>
-		<Icon active name="paper-plane" />
-		<Text>Show info user</Text>
-		</CardItem>
+		  <CardItem cardBody>
+		    <Image
+		      source={{uri:'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4'}}
+		      style={{height: 200, width: null, flex: 1}}
+		      />
+		  </CardItem>
+		  <CardItem>
+		    <Icon active name="paper-plane" />
+		    <Text>Show info user</Text>
+		  </CardItem>
 		</Card>
 		<Button full rounded primary
-	    style={{ marginTop:10}}
-	    onPress={()=> this.props.navigation.navigate("EditScreenOne")}>
-		<Text>
-		edit Profile screen
-	    </Text>
+			style={{ marginTop:10}}
+			onPress={()=> this.props.navigation.navigate("EditScreenOne")}>
+		  <Text>
+		    edit Profile screen
+		  </Text>
 		</Button>
-		</Content>
-		</Container>
+	      </Content>
+	    </Container>
 
 
 	);	
     }
 
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    };
+};
 
-Profile.navigationOptions = ({ navigation }) => ({
-    header: (
-	    <Header>
-	    <Left>
-	    <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
-	    <Icon name="menu" />
-	    </Button >
-	    </Left>
-	    <Body>
-	    <Title>Perfil</Title>
-	    </Body>
-	    <Right/>
-	    </Header>
-    )
 
-});
+export default connect(mapStateToProps)(Profile);
+
+
+

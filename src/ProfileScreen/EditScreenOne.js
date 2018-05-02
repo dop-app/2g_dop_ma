@@ -4,33 +4,33 @@ import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,But
 export default class EditScreenOne extends React.Component{
     static navigationOptions = ({navigation}) => ({
 	header: (
-		<Header>
-		<Left>
+	    <Header>
+	      <Left>
 		<Button transparent onPress={() => navigation.goBack() }>
-		<Icon name="arrow-back"/> 
+		  <Icon name="arrow-back"/> 
 		</Button>
-		</Left>
-		<Body>
+	      </Left>
+	      <Body>
 		<Title>Editar perfil </Title>
-		</Body>
-		<Right />
-		</Header>
+	      </Body>
+	      <Right />
+	    </Header>
 	)
     });
     render() {
 	return (
-		<Container>
-	    <Content padder>
-	    <Card>
-	    <CardItem>
-	    <Icon active name="paper-plane" />
-	    <Text>Edit profile</Text>
-	    <Right>
-	    <Icon name="close"/>
-	    </Right>
-	    </CardItem>
-	    </Card>
-	    </Content>
+	    <Container>
+	      <Content padder>
+		<Card>
+		  <CardItem>
+		    <Icon active name="paper-plane" />
+		    <Text>Edit profile</Text>
+		    <Right>
+		      <Icon name="close"/>
+		    </Right>
+		  </CardItem>
+		</Card>
+	      </Content>
 		</Container>
 	);
     }
