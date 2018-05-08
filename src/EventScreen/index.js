@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Friends from "./Friends.js";
+import Events from "./Events.js";
 import SideBar from "../SideBar/SideBar.js";
 import { DrawerNavigator } from "react-navigation";
 
 const MatchScreenRouter = DrawerNavigator({
-  Amigos: {screen: Friends}
+  Eventos: {screen: Events}
 },{
   contentComponent: props => <SideBar {...props} />
 });

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
 import EditScreenOne from "./EditScreenOne.js";
+
 class Profile extends React.Component {
   /* componentDidMount(){
   Alert.alert("Opps, Looks like you are not signed in");
@@ -47,6 +48,7 @@ class Profile extends React.Component {
     );
   }
 }
+
 const mapStateToProps = (state, ownProps) => {
   return {
     isLoggedIn: state.auth.isLoggedIn

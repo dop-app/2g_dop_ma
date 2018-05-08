@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Container, Header, Content, List, ListItem, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
 
-const amigos = [
+var amigos = [
   {
     name: 'Osmar',
     msg: 'Desarrollador, con un gusto particular en el Software libre y abierto.',
@@ -32,7 +32,7 @@ class Friends extends React.Component {
           <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
         </Left>
         <Body>
-          <Title>Emparejador</Title>
+          <Title>Amigos</Title>
         </Body>
       </Header>
       <Content>
@@ -63,6 +63,5 @@ const mapStateToProps = (state, ownProps) => {
     isLoggedIn: state.auth.isLoggedIn
   };
 };
-
 
 export default connect(mapStateToProps)(Friends);

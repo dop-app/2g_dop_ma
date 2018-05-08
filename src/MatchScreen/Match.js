@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import { Container, Header, Content, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
 
-const cards = [
+var cards = [
   {
     text: 'Card Dop',
     name: 'Dop-Black',
-    // image: uri:'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
-    image: require('../assets/dop_logo_negro.png'),
+    image: 'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
   },
   {
     text: 'Card Otra',
     name: 'Dop-bad',
-    image: require('../assets/dop_logo.png'),
+    image: 'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
   },
 ];
 
@@ -43,30 +42,22 @@ class Match extends React.Component {
             <Card style={{ elevation: 3 }}>
               <CardItem>
                 <Left>
-                  <Thumbnail source={item.image} />
+                  <Thumbnail source={{uri: item.image}} />
                   <Body>
                     <Text>{item.text}</Text>
-                    <Text note>NativeBase</Text>
                   </Body>
                 </Left>
               </CardItem>
               <CardItem cardBody>
-                <Image style={{ height: 300, flex: 1 }} source={item.image} />
+                <Image style={{ height: 300, flex: 1 }} source={{uri: item.image}} />
               </CardItem>
               <CardItem>
-                <Icon name="heart" style={{ color: '#ED4A6A' }} />
+                <Icon name="heart" style={{color: '#ED4A6A'}} />
                 <Text>{item.name}</Text>
               </CardItem>
             </Card>
           }
         />
-        <Button full rounded primary
-          style={{ marginTop:10}}
-          onPress={()=> this.props.navigation.navigate("EditScreenOne")}>
-          <Text>
-            edit Profile screen
-          </Text>
-        </Button>
       </View>
     </Container>
     );
@@ -78,6 +69,5 @@ const mapStateToProps = (state, ownProps) => {
     isLoggedIn: state.auth.isLoggedIn
   };
 };
-
 
 export default connect(mapStateToProps)(Match);
