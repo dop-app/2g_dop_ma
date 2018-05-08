@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Expo from "expo";
 import LoginScreen from './LoginScreen/index.js';
 import ProfileScreen from './ProfileScreen/index.js';
+import MatchScreen from './MatchScreen/index.js';
 import GlobalFont from 'react-native-global-font';
 
 // create our store
