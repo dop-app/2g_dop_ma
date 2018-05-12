@@ -5795,6 +5795,13 @@ react-native-keyboard-aware-scroll-view@0.5.0, react-native-keyboard-aware-scrol
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
+react-native-maps@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.21.0.tgz#005f58e93d7623ad59667e8002101970ddf235c2"
+  dependencies:
+    babel-plugin-module-resolver "^2.3.0"
+    babel-preset-react-native "1.9.0"
+
 "react-native-maps@https://github.com/expo/react-native-maps/archive/0.20.1-exp.0.tar.gz":
   version "0.20.1"
   resolved "https://github.com/expo/react-native-maps/archive/0.20.1-exp.0.tar.gz#81d607e2d77481c0441aecfdbc303389a34084c0"

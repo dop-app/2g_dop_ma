@@ -37,6 +37,7 @@ class Match extends React.Component {
       </Header>
       <View>
         <DeckSwiper
+          looping={false}
           dataSource={cards}
           renderItem={item =>
             <Card style={{ elevation: 3 }}>
