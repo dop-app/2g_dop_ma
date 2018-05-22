@@ -6,12 +6,12 @@ import store from './redux';
 import Application from './src/Application';
 
 export default class App extends React.Component {
-  render() {
-    return(
+    render() {
+	return(
 	    <Provider store={store}>
 	      <Application />
 	    </Provider>
-    );
-  }
+	);
+    }
 }
 AppRegistry.registerComponent('App',()=>APP);

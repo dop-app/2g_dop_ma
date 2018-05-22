@@ -10,11 +10,12 @@ import GlobalFont from 'react-native-global-font';
 //const store = createStore()
 
 class Application extends React.Component {
-    constructor(){
-	super();
+    constructor(props){
+	super(props);
 	this.state = {
 	    isReady:false
 	};
+	state = props.state;
     }
     async componentWillMount(){
 	await Expo.Font.loadAsync({
