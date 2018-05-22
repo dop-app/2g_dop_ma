@@ -4,16 +4,21 @@ import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
 import EditScreenOne from "./EditScreenOne.js";
+import { loadData } from '../../redux/actions/userInfo';
 
 class Profile extends React.Component {
-  /* componentDidMount(){
-  Alert.alert("Opps, Looks like you are not signed in");
-  }*/
-  constructor(props){
-    super(props);
-  }
-  render() {
-    return(
+    constructor(props){
+	super(props);
+	this.state ={
+	    isReady: false,
+	    urlImage: '',
+	    name: '',
+	    age: ''
+	};
+	this.props.onLoadData(1);
+    }
+    render() {
+	return(
 	    <Container>
 	      <Header>
       		<Left>
@@ -45,8 +50,8 @@ class Profile extends React.Component {
       		</Button>
 	      </Content>
 	    </Container>
-    );
-  }
+	);
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -55,4 +60,10 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onloadData: (id) => { dispatch(loadData(id)); }
+    };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);

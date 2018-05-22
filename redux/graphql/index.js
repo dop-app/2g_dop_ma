@@ -1,31 +1,13 @@
-import gql from 'graphql-tag';
+import { request } from 'graphql-request';
 
-let resolversApp = {
-    Mutation: {
-	updateUser: (_,{index,value},{cache}) =>{
-	    const query = gql`
-            query GetCurrentUser {
-		currentUser @client {
-		    id,
-		    token,
-		    isLoggedIn
-		}
-	    }
-	    `;
-	    const previous =cache.readQuery({ query });
-	    const data = {
-		currentUser: {
-		    ...previous.currentUser,
-		    [index]: value
-		}
-	    };
-	    cache.writeQuery({query,data});
-	},
-	resetCurrentUser:(_,d,{ cache })=>{
-	    cache.writeQuery({data: defaultState});
-	}
+export async function getData(query,variables){
+    var x;
+    const endpoint = 'http://35.203.64.114/graphql';
+    await request(endpoint,query,variables).
+	then(data =>{
+	    x=data;
+	});
+    return x;
+}
 
-    }
-};
 
-export default resolversApp;

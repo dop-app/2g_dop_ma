@@ -1,7 +1,6 @@
-import { request } from 'graphql-request';
 import { USER_TOKEN } from '../graphql/Users';
+import { getData } from '../graphql';
 
-const endpoint = 'http://35.203.64.114/graphql';
 
 
 export function login(username,password,dispatch){
@@ -11,7 +10,7 @@ export function login(username,password,dispatch){
 		email: username,
 		password: password
 	    };
-	    var x= await getData(endpoint,USER_TOKEN,variables);
+	    var x= await getData(USER_TOKEN,variables);
 	    console.log(x.auth.token);
 	    if(x.auth.token != null){
 		console.log('entro');
@@ -29,40 +28,9 @@ export function loginSuccess(id,token){
 	id: id,
 	token: token
     };
-    }
-    export const logout =() => {
-	return {
-	    type: 'LOGOUT'
-	};
-    };
-async function getData(endpoint,query,variables){
-    var x;
-    await request(endpoint,query,variables).
-	then(data =>{
-	    x=data;
-	});
-    return x;
 }
-/*
-  if(action.username!='' && action.password!=''){
-    const variables = {
-	email: action.username,
-	password: action.password
+export const logout =() => {
+    return {
+	type: 'LOGOUT'
     };
-    var x= await getData(endpoint,USER_TOKEN,variables);
-    console.log(x.auth.token);
-    if(x.auth.token != ''){
-	console.log('entro');
-	Object.assign(state,{
-	    isLoggedIn: true,
-	    id: x.auth.id,
-	    token: x.auth.token
-	});
-	return state;
-    }else{
-	return state;
-    } 
-}else{
-    return state;
-}
-*/
+};
