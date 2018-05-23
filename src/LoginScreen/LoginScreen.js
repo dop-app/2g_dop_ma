@@ -49,7 +49,8 @@ class LoginScreen extends React.Component {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn,
+	idUser: state.auth.id
     };
 };
 

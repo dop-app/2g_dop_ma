@@ -8,9 +8,10 @@ query pleasure{
 }
 `;
 
-export const PLEASURES_QUERY = gql`
+export const PLEASURES_QUERY = `
 query pleasuresData($id:Int!){
   pleasureByUser(user_id:$id){
+    id,
     name,
     description,
     subcategory{
@@ -19,7 +20,13 @@ query pleasuresData($id:Int!){
   }
 }
 `;
-
+export const USERS_LIST =`
+query usersId($id:Int!){
+  usersByUser(user_id:$id){
+    user_id
+  }
+}
+`;
 export const PLEASURE_MUTATION = gql`
 mutation addPleasure(
 $name:String!,

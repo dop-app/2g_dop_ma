@@ -1,7 +1,8 @@
 import gql from "graphql-tag";
-export const USER_DATA = gql`
+export const USER_DATA =`
 query userData($id:Int!){
   userById(id: $id){
+    id,
     name,
     email,
     gender,
@@ -21,22 +22,15 @@ mutation authToken($email: String!,$password: String!){
   }  
 }
 `;
-export const getCurrentUser = gql`
-  query getCurrentUser {
-    currentUser @client {
-      id,
-      token,
-      isLoggedIn
-    }
-  }
-`;
 
-export const resetCurrentUser = gql`
-  mutation {
-    resetCurrentUser @client {
-      id,
-      token,
-      isLoggedIn
-    }
+export const ALL_USERS_DATA  = `
+query userData($id:Int!){
+ allUsers{
+    name,
+    email,
+    gender,
+    picture,
+    age
   }
-`;
+}
+`

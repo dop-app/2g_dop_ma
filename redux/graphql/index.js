@@ -6,6 +6,10 @@ export async function getData(query,variables){
     await request(endpoint,query,variables).
 	then(data =>{
 	    x=data;
+	}).
+	catch(err =>{
+	    console.log(err.response.errors);
+	    console.log(err.response.data);
 	});
     return x;
 }
