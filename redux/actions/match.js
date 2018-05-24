@@ -1,21 +1,20 @@
 import { USER_DATA } from '../graphql/Users';
-import { FILTER_LIST } from '../graphql/Match';
+import { FILTER_LIST, MATCH_USER } from '../graphql/Match';
 import { USERS_LIST } from '../graphql/Pleasures';
 import { getData } from '../graphql';
 
 export function loadData(id,dispatch){
     return async function(dispatch){
 	if(id!=null){
-	    const variables={
+	    let variables={
 		id: id
 	    };
 	    var data = await getData(USERS_LIST,variables);
 	    if (data != null){
 		console.log(data);
-		var lista = data.usersByUser.map((obj)=>{
+		let lista = data.usersByUser.map((obj)=>{
 		    return obj.user_id;
 		});
-		console.log('lista',lista);
 		dispatch(filterList(id,lista));
 	    }
 	}
@@ -23,14 +22,14 @@ export function loadData(id,dispatch){
 }
 export function filterList(id,data,dispatch){
     return async function(dispatch){
-	const variables = {
+	let variables = {
 	    id: id,
 	    listUsers: data
 	};
-	var usuariosFinales = await getData(FILTER_LIST,variables);
-	var listFinal = usuariosFinales.filtrateListPossibles;
+	let usuariosFinales = await getData(FILTER_LIST,variables);
+	let listFinal = usuariosFinales.filtrateListPossibles;
 	if(listFinal != null && listFinal.listUsersFiltered.length>0){
-	    var dataUsers = [];
+	    let dataUsers = [];
 	    for (var i=0; i<listFinal.listUsersFiltered.length;i++){
 		let vars ={
 		    id: listFinal.listUsersFiltered[i]
@@ -39,6 +38,7 @@ export function filterList(id,data,dispatch){
 		dataUsers.push(dataTmp.userById);
 	    }
 	    if(dataUsers!=null){
+		console.log("dataUsersFinal",dataUsers);
 		dispatch(makeCards(dataUsers));
 	    }
 	    
@@ -48,7 +48,7 @@ export function filterList(id,data,dispatch){
 
 export function makeCards(data,dispatch){
     return async function(dispatch){
-	var cards = data.map((obj)=>{
+	let cards = data.map((obj)=>{
 	    return{
 		id: obj.id,
 		name: obj.name,
@@ -65,4 +65,17 @@ export function success(cards){
 	type: 'LOAD_MATCH_SUCCESS',
 	cards: cards
     };   
+}
+export function matchUser(id,user,state,cards,dispatch){
+    return async function(dispatch){
+	if(id!=null && user != null){
+	    var variables={
+		id_user_one: id,
+		id_user_two: user,
+		state_user_one: state
+	    };
+	    var data = await getData(MATCH_USER,variables);
+	    dispatch(success(cards));
+	}
+    };
 }

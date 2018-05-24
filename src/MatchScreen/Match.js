@@ -3,20 +3,7 @@ import { AppRegistry, Image } from "react-native";
 import { connect } from 'react-redux';
 import { Container, Header, Content, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
-import { loadData } from '../../redux/actions/match';
-
-var cards = [
-  {
-    text: 'Card Dop',
-    name: 'Dop-Black',
-    image: 'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
-  },
-  {
-    text: 'Card Otra',
-    name: 'Dop-bad',
-    image: 'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
-  },
-];
+import { loadData, matchUser } from '../../redux/actions/match';
 
 class Match extends React.Component {
   /* componentDidMount(){
@@ -32,6 +19,28 @@ class Match extends React.Component {
 	console.log('receive new props',nextProps);
 	this.setState(nextProps.data);
     }
+    userAcept(user){
+	console.log("estado",this.state);
+	var newCards = this.state.cards;
+	console.log(newCards);
+	var index = newCards.indexOf(user);
+	if ( index > -1) {
+	    newCards.splice(index, 1);
+	}
+	console.log('newCards',newCards);
+	this.props.onMatchUser(this.idUser,user.id,1,newCards); 
+    }
+    userDeny(user){
+	console.log("estado",this.state);
+	var newCards = this.state.cards;
+	console.log(newCards);
+	var index = newCards.indexOf(user);
+	if ( index > -1) {
+	    newCards.splice(index, 1);
+	}
+	console.log('newCards',newCards);
+	this.props.onMatchUser(this.idUser,user.id,2,newCards);
+    }
     render() {
 	if(this.state.isReady){
 	    return(
@@ -46,8 +55,8 @@ class Match extends React.Component {
 		  </Header>
 		  <View>
 		    <DeckSwiper
-		      onSwipeRight={item=> console.log('right',item)}
-		      onSwipeLeft={item=> console.log('left',item)}
+		      onSwipeRight={item=> this.userDeny(item)}
+		      onSwipeLeft={item=> this.userAcept(item)}
 		      looping={false}
 		      dataSource={this.state.cards}
 		      renderItem={item =>
@@ -107,7 +116,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-	onLoadData: (id) => { dispatch(loadData(id)); }
+	onLoadData: (id) => { dispatch(loadData(id)); },
+	onMatchUser: (id,user,state,cards) =>{ dispatch(matchUser(id,user,state,cards));}
     };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(Match);
