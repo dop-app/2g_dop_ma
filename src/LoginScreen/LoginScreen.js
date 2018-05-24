@@ -20,6 +20,7 @@ class LoginScreen extends React.Component {
     render(){
 	return(
 	    <Container>
+	      <StatusBar hidden={true}/>
 	      <Header>
 		<Body>
 		  <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
@@ -37,7 +38,7 @@ class LoginScreen extends React.Component {
 		    <Label>Password</Label>
 		    <Input
 		      value={this.state.password} 
-                      onChangeText={(text) => this.setState({ password: text })} 
+		      onChangeText={(text) => this.setState({ password: text })} 
 		      secureTextEntry={true}/>
 		  </Item>
 		  <Button onPress={(e) => this.userLogin(e)} full style={{ marginTop: 10 }}><Text style={{ fontFamily: 'Comfortaa_regular'}}>Login</Text></Button>  

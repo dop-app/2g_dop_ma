@@ -1,5 +1,5 @@
 import React  from "react";
-import {AppRegistry, Image} from "react-native";
+import {AppRegistry, Image, StatusBar } from "react-native";
 import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
@@ -33,6 +33,7 @@ class Profile extends React.Component {
 	    );
 	    return(
 		<Container>
+		  <StatusBar hidden={true}/>
 		  <Header>
       		    <Left>
       		      <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
@@ -77,6 +78,7 @@ class Profile extends React.Component {
 	}else{
 	    return (
 		<Container>
+		  <StatusBar hidden={true}/>
 		  <Header>
       		    <Left>
       		      <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>

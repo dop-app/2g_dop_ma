@@ -1,5 +1,5 @@
 import React  from "react";
-import { AppRegistry, Image } from "react-native";
+import { AppRegistry, Image, StatusBar} from "react-native";
 import { connect } from 'react-redux';
 import { Container, Header, Content, List, ListItem, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
@@ -66,50 +66,51 @@ class Citas extends React.Component {
   }
   render() {
 	return(
-    <Container>
-      <Header>
-        <Left>
-          <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
-        </Left>
-        <Body>
-          <Title>Eventos</Title>
-        </Body>
-      </Header>
-      <Content>
-        <List dataArray={citas}
-          renderRow={item =>
-            <ListItem>
-              <Body>
-                <Text>{item.cita}</Text>
-                <Text note>¿Donde?: {item.lugar}</Text>
-                <MapView
-                  liteMode // impide movimiento
-                  style={{height: 200, width: null, flex: 1}}
-                  initialRegion={place.mapRegion}
-                >
-                  <MapView.Marker
-                    coordinate={place.location}
-                    title={place.title}
-                    description={place.description}
-                  />
-                </MapView>
-                <Text note>¿Cuando?: {item.fecha}</Text>
-                <Text note>¿Quienes?: </Text>
-                  <List dataArray={item.personas}
-                    renderRow={item =>
-                      <ListItem>
-                        <Body>
-                          <Text note>{item}</Text>
-                        </Body>
-                      </ListItem>
-                    }>
-                  </List>
-                <Text note>¿Estado?: {item.estado}</Text>
-              </Body>
-            </ListItem>
-          }>
-        </List>
-      </Content>
+	    <Container>
+	      <StatusBar hidden={true}/>
+	      <Header>
+		<Left>
+		  <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
+		</Left>
+		<Body>
+		  <Title>Citas</Title>
+		</Body>
+	      </Header>
+	      <Content>
+		<List dataArray={citas}
+		      renderRow={item =>
+				 <ListItem>
+				       <Body>
+					     <Text>{item.cita}</Text>
+						 <Text note>¿Donde?: {item.lugar}</Text>
+						     <MapView
+							   liteMode // impide movimiento
+							   style={{height: 200, width: null, flex: 1}}
+							   initialRegion={place.mapRegion}
+							   >
+							   <MapView.Marker
+								 coordinate={place.location}
+								 title={place.title}
+								 description={place.description}
+								 />
+							 </MapView>
+							 <Text note>¿Cuando?: {item.fecha}</Text>
+							     <Text note>¿Quienes?: </Text>
+								 <List dataArray={item.personas}
+									   renderRow={item =>
+										      <ListItem>
+											    <Body>
+												  <Text note>{item}</Text>
+												</Body>
+											  </ListItem>
+											  }>
+								     </List>
+								     <Text note>¿Estado?: {item.estado}</Text>
+					   </Body>
+				     </ListItem>
+				 }>
+		</List>
+	      </Content>
     </Container>
     );
   }

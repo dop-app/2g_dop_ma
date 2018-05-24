@@ -1,5 +1,5 @@
 import React  from "react";
-import { AppRegistry, Image } from "react-native";
+import { AppRegistry, Image, StatusBar} from "react-native";
 import { connect } from 'react-redux';
 import { Container, Header, Content, List, ListItem, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
@@ -28,14 +28,15 @@ class Friends extends React.Component {
       this.idUser = this.props.idUser;
       this.props.onLoadData(this.idUser);
   }
-    componentWillReciveProps(nextProps){
-	console.log('recive new props friends',nextProps);
+    componentWillReceiveProps(nextProps){
+	console.log('receive new props friends',nextProps);
 	this.setState(nextProps.data);
     }
     render() {
-	if(this.state.isReady){
+	if(this.state.isReady == 'true'){
 	    return(
 		<Container>
+		  <StatusBar hidden={true}/>
 		  <Header>
 		    <Left>
 		      <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
@@ -64,9 +65,27 @@ class Friends extends React.Component {
 		  </Content>
 		</Container>
 	    );
+	}else if(this.state.isReady == 'none'){
+	    return(
+		<Container>
+		  <StatusBar hidden={true}/>
+		  <Header>
+		    <Left>
+		      <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>
+		    </Left>
+		    <Body>
+		      <Title>Amigos</Title>
+		    </Body>
+		  </Header>
+		  <Content>
+		    <Text>Desafortunadamente usted no tiene contactos</Text>
+		  </Content>
+		</Container>
+	    );
 	}else{
 	    return(
 		<Container>
+		  <StatusBar hidden={true}/>
 		  <Header>
 		    <Left>
 		      <Title style={{ fontFamily: 'Comfortaa_regular'}}>dop</Title>

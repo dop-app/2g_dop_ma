@@ -4,7 +4,7 @@ import SideBar from "../SideBar/SideBar.js";
 import { DrawerNavigator } from "react-navigation";
 
 const MatchScreenRouter = DrawerNavigator({
-  Eventos: {screen: Events}
+    Citas: {screen: Events}
 },{
   contentComponent: props => <SideBar {...props} />
 });

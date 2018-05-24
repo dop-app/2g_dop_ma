@@ -23,6 +23,8 @@ export function loadData(id, dispatch){
 		);
 		if(friendsIds != null && friendsIds.length>0){		    
 		    dispatch(makeFriends(friendsIds));   
+		}else{
+		    dispatch(noFriends());
 		}
 	    }
 	}
@@ -32,7 +34,7 @@ export function loadData(id, dispatch){
 export function makeFriends(data,dispatch){
     return async function(dispatch){
 	console.log(data);
-	let dataUsers=[];
+	var dataUsers=[];
 	for(var i=0;i<data.length;i++){
 	    let vars = {
 		id: data[i]
@@ -44,10 +46,14 @@ export function makeFriends(data,dispatch){
 	dispatch(success(dataUsers));
     };
 }
-export function success(data){
-    console.log('success');
+export function success(dataUsers){
     return{
 	type: 'LOAD_FRIENDS_SUCCESS',
-	friends: data
+	friends: dataUsers
+    };
+}
+export function noFriends(){
+    return {
+	type: 'NO_FOUND_FRIENDS'
     };
 }

@@ -10,12 +10,15 @@ export function loadData(id,dispatch){
 		id: id
 	    };
 	    var data = await getData(USERS_LIST,variables);
-	    if (data != null){
+	    if (data != null ){
 		console.log(data);
 		let lista = data.usersByUser.map((obj)=>{
 		    return obj.user_id;
 		});
-		dispatch(filterList(id,lista));
+		if(lista.lenght>0)
+		    dispatch(filterList(id,lista));
+		else
+		    dispatch(noMatchFriends());
 	    }
 	}
     };
@@ -75,7 +78,14 @@ export function matchUser(id,user,state,cards,dispatch){
 		state_user_one: state
 	    };
 	    var data = await getData(MATCH_USER,variables);
-	    dispatch(success(cards));
+	    if(data != null)
+		dispatch(success(cards));
 	}
     };
+}
+export function noMatchFriends(){
+    return {
+	type: 'NO_USERS_MATCH'
+    };
+
 }
