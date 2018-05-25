@@ -33,9 +33,9 @@ export function loginSuccess(id,token){
     };
 }
 export function logout(dispatch){
-    dispatch(resetUserInfo);
-    dispatch(resetMatch);
-    dispatch(resetFriends);
+    /*   dispatch(resetUserInfo());
+	 dispatch(resetMatch());
+	 dispatch(resetFriends());*/
     return {
 	type: 'LOGOUT'
     };
