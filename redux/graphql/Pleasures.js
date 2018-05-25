@@ -15,7 +15,8 @@ query pleasuresData($id:Int!){
     name,
     description,
     subcategory{
-      name
+      name,
+      category_id
     }
   }
 }
@@ -27,7 +28,7 @@ query usersId($id:Int!){
   }
 }
 `;
-export const PLEASURE_MUTATION = gql`
+export const PLEASURE_MUTATION = `
 mutation addPleasure(
 $name:String!,
 $description:String!,
@@ -45,15 +46,23 @@ user_id:$user_id
 }
 }
 `;
-export const SUBCATEGORY_QUERY = gql`
-query listSubcategories{
+export const SUBCATEGORY_QUERY = `
+query {
   allSubcategories{
      id,
      name,
      description,
-     category{
-       name
-     }
+     category_id
   }
+}
+`;
+
+export const CATEGORY_QUERY = `
+query {
+allCategories{
+  id,
+  name,
+  description,
+}
 }
 `;

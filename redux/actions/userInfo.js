@@ -1,5 +1,5 @@
 import { USER_DATA } from '../graphql/Users';
-import { PLEASURES_QUERY } from '../graphql/Pleasures';
+import { PLEASURES_QUERY, CATEGORY_QUERY, SUBCATEGORY_QUERY } from '../graphql/Pleasures';
 import { getData } from '../graphql';
 
 export function loadData(id,dispatch){
@@ -14,7 +14,22 @@ export function loadData(id,dispatch){
 	    }
 	    var dataP = await getData(PLEASURES_QUERY,variables);
 	    if(dataP != null){
-		dispatch(loadPleasures(dataP.pleasureByUser));
+		var dataC = await getData(CATEGORY_QUERY,{});
+		var dictC = dataC.allCategories.map((obj)=>{
+		    var rObj = {};
+		    rObj[obj.id] = obj;
+		    return rObj;
+		});
+		var dataS = await getData(SUBCATEGORY_QUERY,{});
+		var dictS = dataS.allSubcategories.map((obj)=>{
+		    var rObj = {};
+		    rObj[obj.id] = obj;
+		    return rObj;
+		});
+		console.log('CATEGORIAS',dictC,dictS);
+		
+		dispatch(loadPleasures(dataP.pleasureByUser,dictC,dictS));
+
 		console.log('dataPlaser',dataP.pleasureByUser);
 	    }
 	}
@@ -30,11 +45,12 @@ export function loadSuccess(data){
 	urlImage: data.picture
     };
 }
-export function loadPleasures(data){
-    console.log('loadPleasures',data);
+export function loadPleasures(dataP,dataC,dataS){
     return{
 	type:'PLEASURES_SUCCESS',
-	pleasures: data
+	pleasures: dataP,
+	categories: dataC,
+	subcategories: dataS
     };
 }
 export function resetUserInfo(){

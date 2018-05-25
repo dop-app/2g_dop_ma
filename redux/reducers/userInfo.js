@@ -6,7 +6,8 @@ const defaultState={
     name: '',
     urlImage: '',
     pleasuresReady:false,
-    pleasures:[]
+    pleasures:[],
+    categories: []
 };
 
 export default function reducer(state=defaultState,action){
@@ -23,7 +24,9 @@ export default function reducer(state=defaultState,action){
     case 'PLEASURES_SUCCESS':
 	return Object.assign({},state,{
 	    pleasuresReady: true,
-	    pleasures: action.pleasures
+	    pleasures: action.pleasures,
+	    categories: action.categories,
+	    subcategories: action.subcategories
 	});
     case 'RESET':
 	return defaultState;
