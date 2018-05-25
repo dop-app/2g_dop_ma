@@ -6,6 +6,7 @@ import FriendScreen from "../FriendScreen/index.js";
 import EventScreen from "../EventScreen/index.js";
 import LoginScreen from "../LoginScreen/index.js";
 import SideBar from "../SideBar/SideBar.js";
+
 import { DrawerNavigator } from "react-navigation";
 
 const ProfileScreenRouter = DrawerNavigator({
@@ -13,7 +14,8 @@ const ProfileScreenRouter = DrawerNavigator({
     Buscar: {screen: MatchScreen},
     Amigos: {screen: FriendScreen},
     Eventos: {screen: EventScreen},
-    Salir: {screen: LoginScreen}
+    Salir: {screen: LoginScreen},
+    EditScreenOne: {screen: EditScreenOne}
 },{
   contentComponent: props => <SideBar {...props} />
 });
