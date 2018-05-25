@@ -2,7 +2,7 @@ import React  from "react";
 import {AppRegistry, Alert} from "react-native";
 import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text,Form, Item, Input,Label} from "native-base";
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+
 class EditProfileScreen extends React.Component{
   constructor (props){
 super(props);
@@ -50,25 +50,21 @@ this.state ={
 		    <Label>Email</Label>
 		    <Input
 		      value={this.state.email}
-<<<<<<< HEAD
 		      onChangeText={(text) => this.setState({ email: text })} editable={false}/> //email no se puede editar
-=======
-		      onChangeText={(text) => this.setState({ email: text })}/>
->>>>>>> ce8a81aa3da1a51472e8b8658affc0fa62d364f4
 		  </Item>
-      <Item floatingLabel>
+		  <Item floatingLabel>
 		    <Label>Género</Label>
 		    <Input
 		      value={this.state.gender}
 		      onChangeText={(text) => this.setState({ gender: text })}/>
 		  </Item>
-      <Item floatingLabel>
+		  <Item floatingLabel>
 		    <Label>Edad</Label>
 		    <Input
 		      value={this.state.age}
 		      onChangeText={(text) => this.setState({ age: text })}/>
 		  </Item>
-      <Item floatingLabel>
+		  <Item floatingLabel>
 		    <Label>Foto</Label>
 		    <Input
 		      value={this.state.picture}
