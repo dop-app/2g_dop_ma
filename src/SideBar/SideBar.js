@@ -16,10 +16,10 @@ class SideBar extends React.Component{
 	    <Container>
 	      <Content>
 		<Image
-		  source={require('../assets/dop_logo_negro.png')}
+		  source={require('../assets/dop_logo_color.png')}
 		  style={{
-		      width:200,
-		      height:140,
+		      width:127.6,
+		      height:88.2,
 		      alignSelf:"center",
 		      justifyContent: "center",
 		      alignItems: "center"
@@ -45,7 +45,7 @@ class SideBar extends React.Component{
 			  );
 		      }
 		  }}
-	    
+
 		/>
 		</Content>
 		</Container>
