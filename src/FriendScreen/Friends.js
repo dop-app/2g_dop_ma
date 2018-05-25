@@ -3,31 +3,18 @@ import { AppRegistry, Image, StatusBar} from "react-native";
 import { connect } from 'react-redux';
 import { Container, Header, Content, List, ListItem, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
-import { loadData } from '../../redux/actions/friends';
-
-var amigos = [
-  {
-    name: 'Osmar',
-    msg: 'Desarrollador, con un gusto particular en el Software libre y abierto.',
-    image: 'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
-  },
-  {
-    name: 'Alejandro',
-    msg: 'Desarrollador, con un gusto particular por Apple.',
-    image: 'https://avatars2.githubusercontent.com/u/11141363?s=460&v=4',
-  },
-];
+import { loadDataFriends } from '../../redux/actions/friends';
 
 class Friends extends React.Component {
-  /* componentDidMount(){
-  Alert.alert("Opps, Looks like you are not signed in");
-  }*/
-  constructor(props){
-      super(props);
-      this.state = this.props.data;
-      this.idUser = this.props.idUser;
-      this.props.onLoadData(this.idUser);
-  }
+    /* componentDidMount(){
+       Alert.alert("Opps, Looks like you are not signed in");
+       }*/
+    constructor(props){
+	super(props);
+	this.state = this.props.data;
+	this.idUser = this.props.idUser;
+	this.props.onLoadDataFriends(this.idUser);
+    }
     componentWillReceiveProps(nextProps){
 	console.log('receive new props friends',nextProps);
 	this.setState(nextProps.data);
@@ -112,7 +99,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = (dispatch)=>{
     return {
-	onLoadData:(id)=>{dispatch(loadData(id));}
+	onLoadDataFriends:(id)=>{dispatch(loadDataFriends(id));}
     };
 };
 

@@ -2,7 +2,7 @@ import { USER_DATA } from '../graphql/Users';
 import { FRIENDS } from '../graphql/Match';
 import { getData } from '../graphql';
 
-export function loadData(id, dispatch){
+export function loadDataFriends(id, dispatch){
     return async function(dispatch){
 	if(id!=null){
 	    console.log('dispatch');
@@ -55,5 +55,10 @@ export function success(dataUsers){
 export function noFriends(){
     return {
 	type: 'NO_FOUND_FRIENDS'
+    };
+}
+export function resetFriends(){
+    return{
+	type: 'RESET'
     };
 }

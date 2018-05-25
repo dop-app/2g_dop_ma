@@ -37,3 +37,8 @@ export function loadPleasures(data){
 	pleasures: data
     };
 }
+export function resetUserInfo(){
+    return{
+	type: 'RESET'
+    };
+}

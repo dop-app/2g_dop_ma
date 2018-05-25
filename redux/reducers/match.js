@@ -14,6 +14,8 @@ export default function reducer(state=defaultState,action){
 	return Object.assign({},state,{
 	    isReady: 'none'
 	});
+    case 'RESET':
+	return defaultState;
     default:
 	return state;
     }

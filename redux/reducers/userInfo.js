@@ -25,6 +25,8 @@ export default function reducer(state=defaultState,action){
 	    pleasuresReady: true,
 	    pleasures: action.pleasures
 	});
+    case 'RESET':
+	return defaultState;
     default:
 	return state;
     }

@@ -3,7 +3,7 @@ import { AppRegistry, Image, StatusBar } from "react-native";
 import { connect } from 'react-redux';
 import { Container, Header, Content, Left, Body, Title, Card, CardItem, Right, Icon, Button, Text, View, DeckSwiper, Thumbnail } from "native-base";
 import { StackNavigator } from "react-navigation";
-import { loadData, matchUser } from '../../redux/actions/match';
+import { loadDataMatch, matchUser } from '../../redux/actions/match';
 
 class Match extends React.Component {
   /* componentDidMount(){
@@ -13,7 +13,7 @@ class Match extends React.Component {
 	super(props);
 	this.state = this.props.data;
 	this.idUser = this.props.idUser;
-	this.props.onLoadData(this.idUser);
+	this.props.onLoadDataMatch(this.idUser);
     };
     componentWillReceiveProps(nextProps){
 	console.log('receive new props',nextProps);
@@ -135,7 +135,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-	onLoadData: (id) => { dispatch(loadData(id)); },
+	onLoadDataMatch: (id) => { dispatch(loadDataMatch(id)); },
 	onMatchUser: (id,user,state,cards) =>{ dispatch(matchUser(id,user,state,cards));}
     };
 };

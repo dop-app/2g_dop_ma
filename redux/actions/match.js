@@ -3,7 +3,7 @@ import { FILTER_LIST, MATCH_USER } from '../graphql/Match';
 import { USERS_LIST } from '../graphql/Pleasures';
 import { getData } from '../graphql';
 
-export function loadData(id,dispatch){
+export function loadDataMatch(id,dispatch){
     return async function(dispatch){
 	if(id!=null){
 	    let variables={
@@ -88,4 +88,9 @@ export function noMatchFriends(){
 	type: 'NO_USERS_MATCH'
     };
 
+}
+export function resetMatch(){
+    return{
+	type: 'RESET'
+    };
 }

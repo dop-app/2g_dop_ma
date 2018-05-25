@@ -1,7 +1,8 @@
 import { USER_TOKEN } from '../graphql/Users';
 import { getData } from '../graphql';
-
-
+import { resetFriends } from './friends.js';
+import { resetMatch } from './match.js';
+import { resetUserInfo } from './userInfo.js';
 
 export function login(username,password,dispatch){
     return async function(dispatch){
@@ -10,14 +11,14 @@ export function login(username,password,dispatch){
 		email: username,
 		password: password
 	    };
-	    dispatch(loginSuccess(4,'asdasdjoajdsoiajdoiajsdioajd234asda'));
-	    /*
-	      var x= await getData(USER_TOKEN,variables);
+	    //dispatch(loginSuccess(4,'asdasdjoajdsoiajdoiajsdioajd234asda'));
+	    
+	    var x= await getData(USER_TOKEN,variables);
 	    console.log(x.auth.token);
 	    if(x.auth.token != null){
 		console.log('entro');
 		dispatch(loginSuccess(x.auth.id,x.auth.token));
-		} ;*/
+		} ;
 	} else {
 	    dispatch(this.logout);
 	}
@@ -31,7 +32,10 @@ export function loginSuccess(id,token){
 	token: token
     };
 }
-export const logout =() => {
+export function logout(dispatch){
+    dispatch(resetUserInfo);
+    dispatch(resetMatch);
+    dispatch(resetFriends);
     return {
 	type: 'LOGOUT'
     };
