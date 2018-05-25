@@ -15,10 +15,21 @@ export function loadData(id,dispatch){
 	    var dataP = await getData(PLEASURES_QUERY,variables);
 	    if(dataP != null){
 		var dataC = await getData(CATEGORY_QUERY,{});
+		var dictC = dataC.allCategories.map((obj)=>{
+		    var rObj = {};
+		    rObj[obj.id] = obj;
+		    return rObj;
+		});
 		var dataS = await getData(SUBCATEGORY_QUERY,{});
-		dispatch(loadPleasures(dataP.pleasureByUser,dataC.allCategories,dataS.allSubcategories));
+		var dictS = dataS.allSubcategories.map((obj)=>{
+		    var rObj = {};
+		    rObj[obj.id] = obj;
+		    return rObj;
+		});
+		console.log('CATEGORIAS',dictC,dictS);
+		
+		dispatch(loadPleasures(dataP.pleasureByUser,dictC,dictS));
 
-		console.log('CATEGORIAS',dataC,dataS);
 		console.log('dataPlaser',dataP.pleasureByUser);
 	    }
 	}

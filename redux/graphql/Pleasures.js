@@ -47,14 +47,12 @@ user_id:$user_id
 }
 `;
 export const SUBCATEGORY_QUERY = `
-query listSubcategories{
+query {
   allSubcategories{
      id,
      name,
      description,
-     category{
-       name
-     }
+     category_id
   }
 }
 `;
@@ -62,7 +60,7 @@ query listSubcategories{
 export const CATEGORY_QUERY = `
 query {
 allCategories{
-	id,
+  id,
   name,
   description,
 }
