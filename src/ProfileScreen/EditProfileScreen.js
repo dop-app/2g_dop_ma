@@ -50,7 +50,11 @@ this.state ={
 		    <Label>Email</Label>
 		    <Input
 		      value={this.state.email}
+<<<<<<< HEAD
 		      onChangeText={(text) => this.setState({ email: text })} editable={false}/> //email no se puede editar
+=======
+		      onChangeText={(text) => this.setState({ email: text })}/>
+>>>>>>> ce8a81aa3da1a51472e8b8658affc0fa62d364f4
 		  </Item>
       <Item floatingLabel>
 		    <Label>Género</Label>
