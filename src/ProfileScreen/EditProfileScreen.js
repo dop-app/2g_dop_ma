@@ -50,29 +50,25 @@ this.state ={
 		    <Label>Email</Label>
 		    <Input
 		      value={this.state.email}
-		      onChangeText={(text) => this.setState({ email: text })}
-		      secureTextEntry={true}/>
+		      onChangeText={(text) => this.setState({ email: text })}/>
 		  </Item>
       <Item floatingLabel>
 		    <Label>Género</Label>
 		    <Input
 		      value={this.state.gender}
-		      onChangeText={(text) => this.setState({ gender: text })}
-		      secureTextEntry={true}/>
+		      onChangeText={(text) => this.setState({ gender: text })}/>
 		  </Item>
       <Item floatingLabel>
 		    <Label>Edad</Label>
 		    <Input
 		      value={this.state.age}
-		      onChangeText={(text) => this.setState({ age: text })}
-		      secureTextEntry={true}/>
+		      onChangeText={(text) => this.setState({ age: text })}/>
 		  </Item>
       <Item floatingLabel>
 		    <Label>Foto</Label>
 		    <Input
 		      value={this.state.picture}
-		      onChangeText={(text) => this.setState({ picture: text })}
-		      secureTextEntry={true}/>
+		      onChangeText={(text) => this.setState({ picture: text })}/>
 		  </Item>
 		  <Button onPress={(e) => this.userLogin(e)} full style={{ marginTop: 10 }}><Text style={{ fontFamily: 'Comfortaa_regular'}}>Login</Text></Button>
 		</Form>
