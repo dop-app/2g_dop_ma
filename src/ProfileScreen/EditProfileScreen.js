@@ -1,7 +1,8 @@
 import React  from "react";
 import {AppRegistry, Alert} from "react-native";
+import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text} from "native-base";
-export default class EditScreenOne extends React.Component{
+class EditProfileScreen extends React.Component{
     render() {
 	return (
 	    <Container>
@@ -32,3 +33,18 @@ export default class EditScreenOne extends React.Component{
     }
 
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+	isLoggedIn: state.auth.isLoggedIn,
+	idUser: state.auth.id,
+	data: state.userInfo
+    };
+};
+/*
+  const mapDispatchToProps = (dispatch) => {
+    return {
+	onLoadData: (id) => { dispatch(loadData(id)); }
+    };
+};
+*/
+export default connect(mapStateToProps)(EditProfileScreen);

@@ -11,14 +11,14 @@ export function login(username,password,dispatch){
 		email: username,
 		password: password
 	    };
-	    //dispatch(loginSuccess(4,'asdasdjoajdsoiajdoiajsdioajd234asda'));
-	    
-	    var x= await getData(USER_TOKEN,variables);
+	    dispatch(loginSuccess(5,'asdasdjoajdsoiajdoiajsdioajd234asda'));
+	    /*
+	      var x= await getData(USER_TOKEN,variables);
 	    console.log(x.auth.token);
 	    if(x.auth.token != null){
 		console.log('entro');
 		dispatch(loginSuccess(x.auth.id,x.auth.token));
-		} ;
+		} ;*/
 	} else {
 	    dispatch(this.logout);
 	}

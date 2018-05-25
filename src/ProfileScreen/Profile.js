@@ -3,7 +3,6 @@ import {AppRegistry, Image, StatusBar } from "react-native";
 import { connect } from 'react-redux';
 import {Container,Header, Content, Left, Body,Title,Card,CardItem,Right,Icon,Button, Text} from "native-base";
 import {StackNavigator} from "react-navigation";
-import EditScreenOne from "./EditScreenOne.js";
 import { loadData } from '../../redux/actions/userInfo';
 import {PleasureList} from './Pleasure';
 
@@ -63,13 +62,22 @@ class Profile extends React.Component {
 		      <CardItem>
 			<Text>{ this.state.gender }</Text>
       		      </CardItem>
-      		    </Card>
+		      <CardItem>
+			<Button full rounded primary
+      				style={{ marginTop:10}}
+      				onPress={()=> this.props.navigation.navigate("EditProfileScreen")}>
+			  <Text>
+			    edit Profile screen
+			  </Text>
+			</Button>
+		      </CardItem>
+		    </Card>
 		    {pleasuresInfo}
 		    <Button full rounded primary
       			    style={{ marginTop:10}}
-      			    onPress={()=> this.props.navigation.navigate("EditScreenOne")}>
+      			    onPress={()=> this.props.navigation.navigate("EditPleasures")}>
 		      <Text>
-			edit Profile screen
+			edit gusto screen
 		      </Text>
 		    </Button>
 		  </Content>
